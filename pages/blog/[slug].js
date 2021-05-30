@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getMDXComponent } from "mdx-bundler/client";
 import { getMDX } from "../../lib/mdx";
 
@@ -8,7 +9,14 @@ export default function BlogPost({ code, title }) {
     <>
       <h1>{title}</h1>
       <main>
-        <Component></Component>
+        <Component
+          components={{
+            Image: (props) => {
+              const src = `/generated/${props.src}`;
+              return <Image {...props} src={src}></Image>;
+            },
+          }}
+        ></Component>
       </main>
     </>
   );
